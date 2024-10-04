@@ -6,6 +6,15 @@ This Python application fetches job listings from a specified URL and sends emai
 
 - Fetches job listings from a remote server.
 - Sends email alerts for new job postings.
-- Periodically refreshes the session to keep it alive.
+- Refreshes the session every minute to keep it alive.
+- Sounds an alarm as soon as a job is available.
+- Ensures 24/7 monitoring.
+
+## Applications and issues addressed
+
+- Active jobs typically lasts only 2-5 minutes.
+- Improved job application response time.
+- Helped 8 friends secure part-time jobs by notifying them within seconds of job availability.
+
 
 
