@@ -6,6 +6,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import time
+import os
 
 # GraphQL endpoint
 url = "https://e5mquma77feepi2bdn4d6h3mpu.appsync-api.us-east-1.amazonaws.com/graphql"
@@ -42,9 +43,9 @@ variables = {
 # Email configuration
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-EMAIL_ADDRESS = "muqaddaspreet@gmail.com"
-EMAIL_PASSWORD = "niuganxyxusomajh"
-TO_EMAIL = "muqaddaspreet@gmail.com"
+EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+TO_EMAIL = os.getenv("TO_EMAIL")
 
 
 # Path to your siren sound file
@@ -119,7 +120,7 @@ def monitor_jobs():
                 #send_email("New Job Alert! ", job_details)
                 #  if job['state'] == "QC" and any(location in job_location for location in locations_to_monitor):
                 if job['state'] == "ON" or job['state'] == "AB":
-                    # play_siren()
+                    play_siren()
                     send_email("New Job Alert! ", job_details)
         else:
             print("No new jobs found. \n")
@@ -129,4 +130,3 @@ def monitor_jobs():
 
 if __name__ == "__main__":
     monitor_jobs()
-
