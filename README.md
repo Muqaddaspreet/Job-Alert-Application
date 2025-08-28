@@ -18,7 +18,7 @@ A lightweight Python watcher that polls a job board, **detects new postings in n
 3. **Filter & de-dupe** — Optionally filter by state/city/keywords; ignore job IDs you’ve already seen.  
 4. **Notify** — On new matches, **play a siren** (optional) and **send an email** with job details.  
 
-> ⚠️ **Use responsibly.** Respect the job site’s Terms of Service and rate limits. Tokens/cookies can expire and may require rotation.
+> ⚠️ **Use responsibly.** Respect the job site’s Terms of Service and rate limits. Tokens/cookies can expire and may require rotation..
 
 ---
 
