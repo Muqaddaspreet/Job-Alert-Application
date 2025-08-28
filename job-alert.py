@@ -98,39 +98,31 @@ def fetch_job_postings():
 
 
 def monitor_jobs():
-    seen_jobs = set()
-    #locations_to_monitor = ["Laval", "Lachine", "Longueuil", "Montreal"]
-    while True:
-        refresh_session()  # Refresh the session every 1 minutes
-        job_cards = fetch_job_postings()
-        #new_jobs = [job for job in job_cards if job['jobId'] not in seen_jobs]
-        new_jobs = [job for job in job_cards]
+    refresh_session()
+    job_cards = fetch_job_postings()
+    
+    if not job_cards:
+        print("No jobs returned from API.")
+        return
 
-        if new_jobs:
-            for job in new_jobs:
-                seen_jobs.add(job['jobId'])
+    for job in job_cards:
+        job_location = job.get('city', '')
+        job_details = (
+            f"Location: {job['city']}, {job['state']}\n"
+            f"Job Id: {job['jobId']}\n"
+            f"Job Title: {job['jobTitle']}\n"
+            f"Pay: {job['totalPayRateMin']} - {job['totalPayRateMax']}\n"
+            f"Distance: {job['distance']} km\n"
+        )
+        print(job_details)
 
+        if job['state'] in ["ON", "AB"]:
+            send_email("New Job Alert!", job_details)
 
-                job_location = job.get('city', '')
-                job_details = (f"Location: {job['city']}, {job['state']}\n"
-                               f"Job Id: {job['jobId']}\n"
-                               f"Job Title: {job['jobTitle']}\n"
-                               f"Pay: {job['totalPayRateMin']} - {job['totalPayRateMax']}\n"
-                               f"Distance: {job['distance']} km\n")
-                print(job_details)
-
-                #send_email("New Job Alert! ", job_details)
-                #  if job['state'] == "QC" and any(location in job_location for location in locations_to_monitor):
-                if job['state'] == "ON" or job['state'] == "AB":
-                    # play_siren()
-                    send_email("New Job Alert! ", job_details)
-        else:
-            print("No new jobs found. \n")
-
-        time.sleep(60)  # Check every 1 minutes (60 seconds)
 
 
 if __name__ == "__main__":
     monitor_jobs()
+
 
 
