@@ -101,31 +101,32 @@ def monitor_jobs():
     seen_jobs = set()
     #locations_to_monitor = ["Laval", "Lachine", "Longueuil", "Montreal"]
     refresh_session()  # Refresh the session every 1 minutes
-        job_cards = fetch_job_postings()
-        #new_jobs = [job for job in job_cards if job['jobId'] not in seen_jobs]
-        new_jobs = [job for job in job_cards]
+    job_cards = fetch_job_postings()
+    #new_jobs = [job for job in job_cards if job['jobId'] not in seen_jobs]
+    new_jobs = [job for job in job_cards]
 
-        if new_jobs:
-            for job in new_jobs:
-                seen_jobs.add(job['jobId'])
+    if new_jobs:
+        for job in new_jobs:
+            seen_jobs.add(job['jobId'])
 
 
-                job_location = job.get('city', '')
-                job_details = (f"Location: {job['city']}, {job['state']}\n"
-                               f"Job Id: {job['jobId']}\n"
-                               f"Job Title: {job['jobTitle']}\n"
-                               f"Pay: {job['totalPayRateMin']} - {job['totalPayRateMax']}\n"
-                               f"Distance: {job['distance']} km\n")
-                print(job_details)
+            job_location = job.get('city', '')
+            job_details = (f"Location: {job['city']}, {job['state']}\n"
+                           f"Job Id: {job['jobId']}\n"
+                           f"Job Title: {job['jobTitle']}\n"
+                           f"Pay: {job['totalPayRateMin']} - {job['totalPayRateMax']}\n"
+                           f"Distance: {job['distance']} km\n")
+            print(job_details)
 
-                #send_email("New Job Alert! ", job_details)
-                #  if job['state'] == "QC" and any(location in job_location for location in locations_to_monitor):
-                if job['state'] == "ON" or job['state'] == "AB":
-                    # play_siren()
-                    send_email("New Job Alert! ", job_details)
-        else:
-            print("No new jobs found. \n")
+            #send_email("New Job Alert! ", job_details)
+            #  if job['state'] == "QC" and any(location in job_location for location in locations_to_monitor):
+            if job['state'] == "ON" or job['state'] == "AB":
+                play_siren()
+                send_email("New Job Alert! ", job_details)
+    else:
+        print("No new jobs found. \n")
 
 
 if __name__ == "__main__":
     monitor_jobs()
+
