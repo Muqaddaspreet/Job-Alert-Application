@@ -119,7 +119,7 @@ def monitor_jobs():
                 #send_email("New Job Alert! ", job_details)
                 #  if job['state'] == "QC" and any(location in job_location for location in locations_to_monitor):
                 if job['state'] == "ON" or job['state'] == "AB":
-                    play_siren()
+                    # play_siren()
                     send_email("New Job Alert! ", job_details)
         else:
             print("No new jobs found. \n")
@@ -129,3 +129,4 @@ def monitor_jobs():
 
 if __name__ == "__main__":
     monitor_jobs()
+
