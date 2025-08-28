@@ -7,6 +7,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import time
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # GraphQL endpoint
 url = "https://e5mquma77feepi2bdn4d6h3mpu.appsync-api.us-east-1.amazonaws.com/graphql"
