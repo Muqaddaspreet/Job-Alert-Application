@@ -6,7 +6,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import time
-# import os
+import os
 # from dotenv import load_dotenv
 # load_dotenv()
 
@@ -129,4 +129,5 @@ def monitor_jobs():
 
 if __name__ == "__main__":
     monitor_jobs()
+
 
