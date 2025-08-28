@@ -82,9 +82,7 @@ def refresh_session():
     """Refresh the URL to keep the session alive"""
     response = requests.get(refresh_url, headers=headers)
     if response.status_code == 200:
-        utc_now = datetime.now(timezone.utc)
-        local_now = utc_now.astimezone(tz=timezone(timedelta(hours=-4)))  # EDT offset
-        print(f"Session refreshed successfully. UTC time: {utc_now.strftime('%H:%M:%S')} | Local time: {local_now.strftime('%H:%M:%S')}")
+        print("Session refreshed successfully. Time now: " + datetime.now().strftime("%H:%M:%S"))
     else:
         print(f"Failed to refresh session: {response.status_code}")
 
