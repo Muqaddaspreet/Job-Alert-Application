@@ -2,7 +2,7 @@ name: Job Alert Monitor
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # every 30 minutes
+    - cron: '*/1 * * * *'   # every 1 minute
   workflow_dispatch:        # allows manual run
 
 jobs:
