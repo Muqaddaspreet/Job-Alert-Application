@@ -9,6 +9,7 @@ import time
 import os
 # from dotenv import load_dotenv
 # load_dotenv()
+from datetime import datetime, timezone, timedelta
 
 # GraphQL endpoint
 url = "https://e5mquma77feepi2bdn4d6h3mpu.appsync-api.us-east-1.amazonaws.com/graphql"
@@ -81,7 +82,9 @@ def refresh_session():
     """Refresh the URL to keep the session alive"""
     response = requests.get(refresh_url, headers=headers)
     if response.status_code == 200:
-        print("Session refreshed successfully. Time now: " + datetime.now().strftime("%H:%M:%S"))
+        utc_now = datetime.now(timezone.utc)
+        local_now = utc_now.astimezone(tz=timezone(timedelta(hours=-4)))  # EDT offset
+        print(f"Session refreshed successfully. UTC time: {utc_now.strftime('%H:%M:%S')} | Local time: {local_now.strftime('%H:%M:%S')}")
     else:
         print(f"Failed to refresh session: {response.status_code}")
 
@@ -123,6 +126,7 @@ def monitor_jobs():
 
 if __name__ == "__main__":
     monitor_jobs()
+
 
 
 
