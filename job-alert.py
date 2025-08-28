@@ -1,6 +1,6 @@
 from datetime import datetime
 
-import pygame
+# import pygame
 import requests
 import smtplib
 from email.mime.text import MIMEText
@@ -51,11 +51,11 @@ TO_EMAIL = os.getenv("TO_EMAIL")
 
 
 # Path to your siren sound file
-siren_sound = "C:/Users/Muqaddas/Downloads/mixkit-ambulance-siren-us-1642.wav"
+# siren_sound = "C:/Users/Muqaddas/Downloads/mixkit-ambulance-siren-us-1642.wav"
 
 
 # Initialize pygame mixer
-pygame.mixer.init()
+# pygame.mixer.init()
 
 
 def send_email(subject, body):
@@ -72,9 +72,9 @@ def send_email(subject, body):
         server.send_message(msg)
 
 
-def play_siren():
-    pygame.mixer.music.load(siren_sound)
-    pygame.mixer.music.play()
+# def play_siren():
+#     pygame.mixer.music.load(siren_sound)
+#     pygame.mixer.music.play()
 
 
 def refresh_session():
@@ -122,7 +122,7 @@ def monitor_jobs():
                 #send_email("New Job Alert! ", job_details)
                 #  if job['state'] == "QC" and any(location in job_location for location in locations_to_monitor):
                 if job['state'] == "ON" or job['state'] == "AB":
-                    play_siren()
+                    # play_siren()
                     send_email("New Job Alert! ", job_details)
         else:
             print("No new jobs found. \n")
@@ -132,3 +132,4 @@ def monitor_jobs():
 
 if __name__ == "__main__":
     monitor_jobs()
+
